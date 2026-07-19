@@ -1,4 +1,4 @@
-import random, csv
+import random, csv, os
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
@@ -15,6 +15,8 @@ class User:
 
 class SystemInfo:
     def __init__(self):
+        for folder in ("data", "reports", "visualizations"):
+               os.makedirs(folder, exist_ok=True)
         self.users,self.appliances={},{}
         self.normal_rate, self.peak_rate, self.overloadLimit = 15.0, 25.0, 50.0
         for name, power in [("Ceiling fan", 75), ("Air conditioner", 1500), ("Refrigerator", 150),
