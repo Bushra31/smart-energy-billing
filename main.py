@@ -54,8 +54,11 @@ def main():
                 for i, n in enumerate(apps, 1): print(f"  {i}. {n}")
                 assign_appliance(sys, uid, apps[get_int(f"Select (1-{len(apps)}): ",1,len(apps)) - 1])
         elif c==6:
-            print("\nSIMULATE")
-            simulate_usage(sys, get_int("User ID: "), get_int("Days (1-365): ", 1, 365))
+               print("\nSIMULATE")
+               uid=get_int("User ID: ")
+               d=get_int("Days (1-365): ", 1, 365)
+               mode=get_int("Mode (1=Manual 2=Auto): ", 1, 2)
+               simulate_usage(sys, uid, d, auto=(mode==2))
         elif c==7:
             print("\nBILL")
             calculate_bill(sys, get_int("User ID: "))
