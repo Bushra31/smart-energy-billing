@@ -2,6 +2,8 @@
 
 A Python console application that tracks household electricity consumption per appliance, calculates bills with separate peak and normal tariff rates, visualizes usage patterns, and forecasts next month's consumption and cost using linear regression.
 
+![Prediction chart](screenshots/prediction.png)
+
 ## Features
 
 - **Multi-user management** — add and remove users, each with their own appliance set, usage records, and bill
@@ -30,6 +32,12 @@ python main.py
 ```
 
 Output folders (`data/`, `reports/`, `visualizations/`) are created automatically on first run.
+
+## Sample charts
+
+| Peak vs. Normal usage | Daily trend |
+|---|---|
+| ![Peak vs normal](screenshots/peak_normal.png) | ![Trend](screenshots/trend.png) |
 
 ## How the prediction works
 
