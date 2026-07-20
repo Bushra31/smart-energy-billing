@@ -82,10 +82,6 @@ def simulate_usage(sys,uid,days=30,auto=False):
         print(f"{'WARNING! HIGH USAGE!' if daily_total>sys.overloadLimit else 'Daily total:'} {daily_total:.2f} kWh")
     print(f"\nSimulation complete")
     save_usage_logs(sys,uid)
-        
-        print(f"{'WARNING! HIGH USAGE!' if daily_total>sys.overloadLimit else 'Daily total:'} {daily_total:.2f} kWh")  
-    print(f"\nSimulation complete")
-    save_usage_logs(sys,uid)
 
 def calculate_bill(sys,uid):
     if uid not in sys.users: return print(f"Error: User ID {uid} not found")
