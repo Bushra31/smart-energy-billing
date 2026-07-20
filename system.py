@@ -56,28 +56,32 @@ def simulate_usage(sys,uid,days=30,auto=False):
     if uid not in sys.users: return print(f"Error: User ID {uid} not found")
     u=sys.users[uid]
     if not u.appliances: return print(f"Error: No appliances assigned")
-    
-    print(f"\nSimulating {days} days for {u.name} (Enter hours 0-24 for each appliance)\n")
+
+    print(f"\nSimulating {days} days for {u.name}\n")
     u.dailyUsage_record =[]
-    
+
     for day in range(1, days+1):
         print(f"\nDay {day}")
         daily_total=0.0
         for app_name in u.appliances:
-               app=sys.appliances[app_name]
-               if auto:
-                   hrs = 24.0 if app_name == "Refrigerator" else round(random.uniform(0.5, 8), 1)
-                   print(f"  {app_name}: {hrs}")
-               else:
-                   while True:
-                       try:
-                           hrs=float(input(f"  {app_name}: "))
-                           if 0<=hrs<=24: break
-                           print(" Enter 0-24")
-                       except: print(" Enter valid number")
+            app=sys.appliances[app_name]
+            if auto:
+                hrs = 24.0 if app_name == "Refrigerator" else round(random.uniform(0.5, 8), 1)
+                print(f"  {app_name}: {hrs}")
+            else:
+                while True:
+                    try:
+                        hrs=float(input(f"  {app_name}: "))
+                        if 0<=hrs<=24: break
+                        print(" Enter 0-24")
+                    except: print(" Enter valid number")
             kwh=app.calculate_kwh(hrs)
             u.dailyUsage_record.append([day, app_name, round(hrs, 2), round(kwh, 3), random.random()<0.3])
             daily_total += kwh
+
+        print(f"{'WARNING! HIGH USAGE!' if daily_total>sys.overloadLimit else 'Daily total:'} {daily_total:.2f} kWh")
+    print(f"\nSimulation complete")
+    save_usage_logs(sys,uid)
         
         print(f"{'WARNING! HIGH USAGE!' if daily_total>sys.overloadLimit else 'Daily total:'} {daily_total:.2f} kWh")  
     print(f"\nSimulation complete")
